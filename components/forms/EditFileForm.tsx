@@ -90,13 +90,13 @@ const EditFileForm: React.FC<EditFileFormProps> = ({
             type="button"
             variant="outline"
             onClick={onClose}
-            className="border-gray-300 text-gray-700 hover:bg-gray-50"
+            className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
             disabled={isPending}
           >
             Cancel
           </Button>
 
-          <Button type="submit" disabled={isPending}>
+          <Button className="w-full" type="submit" disabled={isPending}>
             {isPending ? "Saving..." : "Save Changes"}
           </Button>
         </div>

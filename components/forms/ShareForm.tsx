@@ -25,9 +25,10 @@ const shareFileSchema = z.object({
 
 type ShareFormProps = {
   file: File;
+  onClose: () => void;
 };
 
-const ShareForm = ({ file }: ShareFormProps) => {
+const ShareForm = ({ file, onClose }: ShareFormProps) => {
   const form = useForm({
     resolver: zodResolver(shareFileSchema),
     defaultValues: {
@@ -52,9 +53,9 @@ const ShareForm = ({ file }: ShareFormProps) => {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter email address"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-500"
                   {...field}
+                  placeholder="Enter email address"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:ring-2"
                 />
               </FormControl>
               <FormMessage />
@@ -84,15 +85,15 @@ const ShareForm = ({ file }: ShareFormProps) => {
           <Button
             type="button"
             variant="outline"
-            onClick={() => form.reset()}
-            className="border-gray-300 text-gray-700 hover:bg-gray-50"
+            onClick={() => {
+              form.reset();
+              onClose();
+            }}
+            className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            className="rounded-md bg-green-600 px-4 py-2 text-white shadow-lg transition duration-150 hover:bg-green-700"
-          >
+          <Button type="submit" className="w-full">
             Share
           </Button>
         </div>

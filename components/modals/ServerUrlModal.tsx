@@ -40,10 +40,36 @@ const ServerUrlModal = () => {
   const handleSave = (data: ServerUrlFormValues) => {
     startTransition(async () => {
       const { url } = data;
-      localStorage.setItem("serverUrl", url);
-      setServerUrl(url);
-      modal.onClose();
-      toast.success("Server URL saved successfully!");
+
+      try {
+        const response = await fetch("/api/verify-server-url", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            url,
+            clientVersion: "1.0.0",
+            // TODO?: Ask client for the version as well??
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Server verification failed");
+        }
+
+        const result = await response.json();
+
+        // If successful, save to localStorage and update Zustand store
+        localStorage.setItem("serverUrl", url);
+        setServerUrl(url);
+        modal.onClose();
+
+        toast.success("Server URL saved and verified successfully!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to verify server URL.");
+      }
     });
   };
 

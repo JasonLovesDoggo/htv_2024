@@ -22,7 +22,7 @@ const ShareModal = () => {
     <Dialog open={isOpen} onOpenChange={modal.onClose}>
       <DialogContent className="rounded-lg bg-white shadow-2xl sm:max-w-md md:p-8">
         <DialogHeader className="flex flex-col items-center space-y-2 text-center">
-          <Share2 className="h-10 w-10 text-green-600" />
+          <Share2 className="h-10 w-10" />
           <DialogTitle className="text-2xl font-extrabold tracking-tight text-gray-900">
             Share File
           </DialogTitle>
@@ -33,7 +33,7 @@ const ShareModal = () => {
         </DialogHeader>
 
         {/* Share Form */}
-        <ShareForm file={file} />
+        <ShareForm file={file} onClose={modal.onClose} />
       </DialogContent>
     </Dialog>
   );
