@@ -1,12 +1,14 @@
 "use client";
 
 import "./globals.css";
+
 import { Space_Grotesk } from "next/font/google";
-import Sidebar from "@/components/Sidebar";
-import Navbar from "@/components/Navbar";
-import { SidebarProvider } from "@/hooks/use-sidebar";
+
 import { cn } from "@/lib/utils";
-import UploadModal from "@/components/UploadModal";
+import { SidebarProvider } from "@/hooks/use-sidebar";
+import UploadModal from "@/components/modals/UploadModal";
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -23,7 +25,7 @@ export default function RootLayout({
       <body className={cn("min-h-svh", spaceGrotesk.className)}>
         <SidebarProvider>
           <UploadModal />
-          <div className="bg-dots flex [background-size:32px_32px]">
+          <div className="flex bg-dots [background-size:32px_32px]">
             <Sidebar />
             <main className="flex max-h-svh min-h-svh flex-1 flex-col overflow-hidden rounded-lg p-6 md:p-8 md:pl-80 lg:p-12 lg:pl-80">
               <Navbar />

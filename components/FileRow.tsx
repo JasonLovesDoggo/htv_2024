@@ -1,6 +1,8 @@
 import React from "react";
-import { TableCell, TableRow } from "@/components/ui/table";
+
 import { type File } from "@/lib/data/file";
+import { TableCell, TableRow } from "@/components/ui/table";
+
 import FileActionsDropdown from "./FileActionsDropdown";
 
 interface FileRowProps {

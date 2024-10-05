@@ -1,8 +1,9 @@
 "use client";
 
-import { useUploadModal } from "@/hooks/use-upload-modal";
-import { cn } from "@/lib/utils";
 import React from "react";
+
+import { cn } from "@/lib/utils";
+import { useUploadModal } from "@/hooks/use-upload-modal";
 
 type Props = {
   children?: React.ReactNode;

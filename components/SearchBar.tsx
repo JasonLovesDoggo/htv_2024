@@ -1,8 +1,8 @@
 "use client";
 
-import { Search } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 
 // Debounce function outside the component to avoid recreation on every render
 const debounce = (func: (value: string) => void, waitFor: number) => {

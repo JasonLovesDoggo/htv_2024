@@ -2,16 +2,18 @@
 
 import React from "react";
 import { Edit3, MoreVertical, Share2, Trash2 } from "lucide-react";
+
 import { type File } from "@/lib/data/file";
-import EditButton from "./EditButton";
-import DeleteButton from "./DeleteButton";
-import ShareButton from "./ShareButton";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
+import ShareButton from "./ShareButton";
 
 interface FileActionsDropdownProps {
   file: File;

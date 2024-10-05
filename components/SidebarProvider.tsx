@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+
 import SidebarContext from "@/lib/SidebarContext";
 
 export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({

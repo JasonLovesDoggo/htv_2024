@@ -1,6 +1,7 @@
 "use client";
 
 import { FaBars } from "react-icons/fa";
+
 import { useSidebar } from "@/hooks/use-sidebar";
 
 const Navbar: React.FC = () => {

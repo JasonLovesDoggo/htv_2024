@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFile, FaUserCircle, FaEllipsisV } from "react-icons/fa";
+import { FaEllipsisV, FaFile, FaUserCircle } from "react-icons/fa";
 
 type SharedFile = {
   id: string;

@@ -1,7 +1,8 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { cn } from "@/lib/utils";
 
 const filters = ["All files", "Image", "Video", "Audio", "Document", "Other"];

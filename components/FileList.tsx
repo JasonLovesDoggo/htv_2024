@@ -1,4 +1,6 @@
 import React from "react";
+
+import { File, getFiles } from "@/lib/data/file";
 import {
   Table,
   TableBody,
@@ -6,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { File, getFiles } from "@/lib/data/file";
+
 import FileRow from "./FileRow";
 import NoFilesFound from "./NoFilesFound";
 

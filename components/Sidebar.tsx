@@ -1,10 +1,12 @@
 "use client";
 
-import { navLinks } from "@/lib/config/site";
-import { cn } from "@/lib/utils";
-import { Upload, Vault } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Upload, Vault } from "lucide-react";
+
+import { navLinks } from "@/lib/config/site";
+import { cn } from "@/lib/utils";
+
 import UploadButton from "./UploadButton";
 
 const Sidebar: React.FC = () => {

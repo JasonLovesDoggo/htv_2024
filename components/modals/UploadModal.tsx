@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
-import { z } from "zod";
+import React, { useCallback, useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UploadCloud } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
 import { useUploadModal } from "@/hooks/use-upload-modal";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,14 +19,13 @@ import {
 } from "@/components/ui/dialog";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UploadCloud } from "lucide-react";
 
 // Define the validation schema with Zod
 const uploadSchema = z.object({

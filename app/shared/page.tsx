@@ -1,5 +1,6 @@
-import SharedFileList from "@/components/SharedFileList";
 import { FaShareAlt } from "react-icons/fa";
+
+import SharedFileList from "@/components/SharedFileList";
 
 export default function Shared() {
   return (

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Trash2 } from "lucide-react"; // Use lucide-react icons
+
 import { type File } from "@/lib/data/file";
 
 interface DeleteButtonProps {
