@@ -19,7 +19,7 @@ export default function Files({
         <div>
           <h1 className="text-3xl font-bold">Files</h1>
           <p className="text-lg text-gray-600">
-            View and manage all your files from one central location.
+            View and manage all your files.
           </p>
         </div>
         <UploadButton />

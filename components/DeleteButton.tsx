@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Trash2 } from "lucide-react"; // Use lucide-react icons
 import { type File } from "@/lib/data/file";
 
 interface DeleteButtonProps {
@@ -14,9 +15,10 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ file }) => {
 
   return (
     <button
-      className="rounded-md bg-red-500 px-4 py-2 text-white transition-colors duration-150 hover:bg-red-600"
+      className="flex items-center justify-center rounded-md border border-red-500 bg-red-500/10 px-3 py-2 text-red-600 transition-colors duration-150 hover:bg-red-500/20"
       onClick={() => onDelete(file)}
     >
+      <Trash2 className="mr-1 h-4 w-4" />
       Delete
     </button>
   );
