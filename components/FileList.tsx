@@ -35,7 +35,7 @@ const FileListTable = ({ files }: { files: File[] }) => (
   <Table className="min-w-full">
     <TableHeader>
       <TableRow
-        className="grid grid-cols-5 gap-4 border-b border-gray-300"
+        className="grid grid-cols-5 gap-4 border-b border-gray-300 bg-gray-50 hover:bg-gray-200"
         style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
       >
         <TableHead className="px-3 text-left font-medium">Name</TableHead>
@@ -46,7 +46,7 @@ const FileListTable = ({ files }: { files: File[] }) => (
         <TableHead className="px-3 text-center font-medium">
           Last modified
         </TableHead>
-        <TableHead className="px-3 text-right font-medium">Actions</TableHead>
+        <TableHead className="px-3 text-left font-medium">Actions</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>

@@ -15,10 +15,10 @@ export default function Files({
 }: PageProps) {
   return (
     <div className="">
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full justify-between gap-4 max-sm:flex-col sm:items-center">
         <div>
-          <h1 className="text-3xl font-bold">Files</h1>
-          <p className="text-lg text-gray-600">
+          <h1 className="text-xl font-bold sm:text-2xl lg:text-3xl">Files</h1>
+          <p className="text-gray-600 md:text-lg">
             View and manage all your files.
           </p>
         </div>

@@ -5,9 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadCloud } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
-import { useUploadModal } from "@/hooks/use-upload-modal";
+import { UploadFormSchema, uploadSchema } from "@/lib/validators/file";
+import { useModal } from "@/hooks/use-modal";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,19 +27,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// Define the validation schema with Zod
-const uploadSchema = z.object({
-  name: z
-    .string()
-    .min(1, { message: "Name is required" })
-    .max(50, { message: "Name can't exceed 50 characters" }),
-  file: z.instanceof(File, { message: "File is required" }),
-});
-
-type UploadFormSchema = z.infer<typeof uploadSchema>;
-
-const UploadModal: React.FC = () => {
-  const { isOpen, onClose } = useUploadModal();
+const UploadModal = () => {
+  const { isOpen, modalType, onClose } = useModal();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
   const form = useForm<UploadFormSchema>({
@@ -83,7 +72,7 @@ const UploadModal: React.FC = () => {
 
   // Retrieve the uploaded file data from local storage when the modal is opened
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && modalType === "upload") {
       const storedData = localStorage.getItem("uploadedFile");
       if (storedData) {
         const { name, file } = JSON.parse(storedData);
@@ -95,7 +84,7 @@ const UploadModal: React.FC = () => {
   }, [isOpen, form]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen && modalType === "upload"} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md md:p-8">
         <DialogHeader>
           <DialogTitle>Upload File</DialogTitle>
