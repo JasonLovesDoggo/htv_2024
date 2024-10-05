@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
       uploadFile(file)
 
-      sendResponse({ balls: true });
+      sendResponse('received');
   }
 });
 
