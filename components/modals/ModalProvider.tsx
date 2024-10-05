@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 
+import ServerUrlProvider from "../ServerUrlProvider";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import ServerUrlModal from "./ServerUrlModal";
 import ShareModal from "./ShareModal";
 import UploadModal from "./UploadModal";
 
@@ -24,6 +26,8 @@ const ModalProvider = () => {
       <EditModal />
       <DeleteModal />
       <ShareModal />
+      <ServerUrlModal />
+      <ServerUrlProvider />
     </>
   );
 };

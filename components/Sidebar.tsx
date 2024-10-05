@@ -44,12 +44,7 @@ const Sidebar: React.FC = () => {
 
       {/* Upload Button at the bottom */}
       <div className="mt-auto">
-        <UploadButton>
-          <button className="flex w-full items-center gap-4 rounded-xl bg-zinc-800 px-4 py-3 text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-zinc-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-zinc-300 active:scale-95">
-            <Upload className="size-5" />
-            Upload
-          </button>
-        </UploadButton>
+        <UploadButton className="w-full bg-gray-50" />
       </div>
     </div>
   );

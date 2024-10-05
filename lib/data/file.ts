@@ -1,4 +1,5 @@
 export interface File {
+  id: string;
   name: string;
   type: "image" | "video" | "audio" | "document" | "other";
   owner: string;
@@ -7,48 +8,56 @@ export interface File {
 
 const files: File[] = [
   {
+    id: "1",
     name: "Presentation 1",
     type: "document",
     owner: "You",
     lastModified: "5/24/22, 12:30 PM",
   },
   {
+    id: "2",
     name: "Vacation photos",
     type: "image",
     owner: "You",
     lastModified: "5/23/22, 9:45 AM",
   },
   {
+    id: "3",
     name: "Budget 2022",
     type: "document",
     owner: "You",
     lastModified: "5/21/22, 4:15 PM",
   },
   {
+    id: "4",
     name: "Project plan",
     type: "document",
     owner: "You",
     lastModified: "5/20/22, 2:00 PM",
   },
   {
+    id: "5",
     name: "Meeting notes",
     type: "document",
     owner: "You",
     lastModified: "5/19/22, 11:00 AM",
   },
   {
+    id: "6",
     name: "Podcast episode",
     type: "audio",
     owner: "You",
     lastModified: "5/18/22, 3:00 PM",
   },
   {
+    id: "7",
     name: "Tutorial video",
     type: "video",
     owner: "You",
     lastModified: "5/17/22, 10:00 AM",
   },
   {
+    id: "8",
     name: "Archive",
     type: "other",
     owner: "You",

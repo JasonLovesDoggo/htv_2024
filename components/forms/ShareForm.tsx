@@ -36,6 +36,7 @@ const ShareForm = ({ file }: ShareFormProps) => {
   });
 
   const handleSubmit = (values: { email: string }) => {
+    // TODO: Call an API endpoint to share the file
     console.log(`Sharing file "${file.name}" with ${values.email}`);
   };
 

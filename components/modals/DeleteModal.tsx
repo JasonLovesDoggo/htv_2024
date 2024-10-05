@@ -1,5 +1,6 @@
-import { Trash2 } from "lucide-react"; // Icon for deletion
+import { Trash2 } from "lucide-react";
 
+import { File } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,15 @@ const DeleteModal = () => {
   const file = modal.data;
 
   const handleDelete = () => {
+    // TODO: Call an API endpoint to delete the file
+
+    const storedFiles = localStorage.getItem("files");
+    const files = storedFiles ? JSON.parse(storedFiles) : [];
+
+    const filteredFiles = files.filter((f: File) => f.id !== file?.id);
+
+    localStorage.setItem("files", JSON.stringify(filteredFiles));
+
     console.log(`File ${file?.name} deleted.`);
 
     modal.onClose();

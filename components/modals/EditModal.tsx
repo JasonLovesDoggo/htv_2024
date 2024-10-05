@@ -1,4 +1,4 @@
-import { Clock, User, Users } from "lucide-react"; // Icons for visual enhancement
+import { Clock, User, Users } from "lucide-react";
 
 import { useModal } from "@/hooks/use-modal";
 
@@ -17,10 +17,19 @@ const EditModal = () => {
   const isOpen = modal.isOpen && modal.modalType === "edit";
   const file = modal.data;
 
+  const handleEditSuccess = (updatedFile: { id: string; name: string }) => {
+    // Update the file data in the modal
+    modal.onUpdateData({
+      ...file,
+      name: updatedFile.name,
+    });
+
+    modal.onClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={modal.onClose}>
       <DialogContent className="rounded-lg bg-white shadow-2xl sm:max-w-md md:p-8">
-        {/* Modal Header */}
         <DialogHeader className="flex flex-col items-center space-y-2 text-center">
           <DialogTitle className="text-2xl font-extrabold tracking-tight text-gray-900">
             Edit File
@@ -29,7 +38,6 @@ const EditModal = () => {
             Update file details and manage permissions
           </DialogDescription>
         </DialogHeader>
-        {/* File Details */}
         <div className="mt-6 space-y-6">
           <div className="flex items-center space-x-3">
             <User className="h-5 w-5 text-gray-500" />
@@ -56,11 +64,14 @@ const EditModal = () => {
             </p>
           </div>
         </div>
-        {/* Edit Input */}
-        <EditFileForm
-          defaultFileName={file?.name || "My File Name"}
-          onClose={modal.onClose} // Pass modal close function
-        />
+        {file && (
+          <EditFileForm
+            fileId={file.id}
+            defaultFileName={file.name}
+            onClose={modal.onClose}
+            onSuccess={handleEditSuccess}
+          />
+        )}
       </DialogContent>
     </Dialog>
   );

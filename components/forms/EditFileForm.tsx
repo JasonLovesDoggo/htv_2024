@@ -1,9 +1,11 @@
 "use client";
 
+import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { editFileSchema } from "@/lib/validators/file";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,23 +17,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// Zod schema for validation
-const editFileSchema = z.object({
-  name: z
-    .string()
-    .min(1, "File name is required")
-    .max(100, "File name cannot exceed 100 characters"),
-});
-
 type EditFileFormProps = {
+  fileId: string;
   defaultFileName: string;
   onClose: () => void;
+  onSuccess: (updatedFile: { id: string; name: string }) => void;
 };
 
 const EditFileForm: React.FC<EditFileFormProps> = ({
+  fileId,
   defaultFileName,
   onClose,
+  onSuccess,
 }) => {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm({
     resolver: zodResolver(editFileSchema),
     defaultValues: {
@@ -39,16 +39,34 @@ const EditFileForm: React.FC<EditFileFormProps> = ({
     },
   });
 
-  const handleSubmit = (values: { name: string }) => {
-    console.log("Updated file name:", values.name);
+  const handleSubmit = async (values: { name: string }) => {
+    startTransition(async () => {
+      try {
+        const response = await fetch("/api/file", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: fileId, name: values.name }),
+        });
 
-    onClose();
+        if (!response.ok) {
+          throw new Error("Failed to update file name");
+        }
+
+        const updatedFile = await response.json();
+
+        onSuccess({ id: updatedFile.id, name: updatedFile.name });
+        onClose();
+      } catch (err) {
+        console.log("Error updating file name:", err);
+      }
+    });
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
-        {/* File Name Input Field */}
         <FormField
           control={form.control}
           name="name"
@@ -67,20 +85,20 @@ const EditFileForm: React.FC<EditFileFormProps> = ({
           )}
         />
 
-        {/* Form Buttons */}
         <div className="flex justify-end space-x-4">
-          {/* Cancel Button */}
           <Button
             type="button"
             variant="outline"
             onClick={onClose}
             className="border-gray-300 text-gray-700 hover:bg-gray-50"
+            disabled={isPending}
           >
             Cancel
           </Button>
 
-          {/* Save Changes Button */}
-          <Button type="submit">Save Changes</Button>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Saving..." : "Save Changes"}
+          </Button>
         </div>
       </form>
     </Form>

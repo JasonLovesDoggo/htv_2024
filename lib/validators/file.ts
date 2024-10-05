@@ -20,3 +20,18 @@ export const editFileSchema = z.object({
 });
 
 export type EditFileFormSchema = z.infer<typeof editFileSchema>;
+
+export const serverUrlSchema = z.object({
+  url: z
+    .string()
+    .trim()
+    .min(10, "URL is too short, must be at least 10 characters")
+    .max(2048, "URL is too long, must be less than 2048 characters")
+    .regex(
+      /^https:\/\/[a-zA-Z0-9-._~:\/?#[\]@!$&'()*+,;=%]+$/,
+      "URL must start with 'https://' and be a valid URL format",
+    )
+    .url("Please enter a valid URL"),
+});
+
+export type ServerUrlFormValues = z.infer<typeof serverUrlSchema>;
