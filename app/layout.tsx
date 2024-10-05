@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import { SidebarProvider } from "@/hooks/use-sidebar";
 import { cn } from "@/lib/utils";
+import UploadModal from "@/components/UploadModal";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("min-h-svh", spaceGrotesk.className)}>
         <SidebarProvider>
+          <UploadModal />
           <div className="flex">
             <Sidebar />
             <main className="flex min-h-svh flex-1 flex-col rounded-lg p-6 md:p-8 md:pl-80 lg:p-12 lg:pl-80">

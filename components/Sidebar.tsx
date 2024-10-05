@@ -2,28 +2,24 @@
 
 import { navLinks } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
-import { Vault } from "lucide-react";
+import { Upload, Vault } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname();
-  //   const { isOpen, onClose } = useSidebar();
 
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div
-      className={cn(
-        "fixed left-0 h-full w-80 bg-white px-8 py-10 max-md:hidden",
-      )}
-    >
+    <div className="fixed left-0 flex h-full w-80 flex-col justify-between px-8 py-12 max-md:hidden">
       {/* Logo */}
       <Link href="/" className="mb-12 flex items-center gap-2.5">
-        <Vault className="size-7" />
+        <Vault strokeWidth={2.5} className="size-7 text-rose-500" />
         <h1 className="text-xl font-bold text-gray-800">SwiftLock</h1>
       </Link>
 
+      {/* Navigation Links */}
       <nav className="flex flex-col gap-4">
         {navLinks.map((link) => (
           <Link
@@ -42,6 +38,14 @@ const Sidebar: React.FC = () => {
           </Link>
         ))}
       </nav>
+
+      {/* Upload Button at the bottom */}
+      <div className="mt-auto">
+        <button className="flex w-full items-center gap-4 rounded-xl bg-zinc-800 px-4 py-3 text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-zinc-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-zinc-300 active:scale-95">
+          <Upload className="size-5" />
+          Upload
+        </button>
+      </div>
     </div>
   );
 };

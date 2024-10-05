@@ -1,92 +1,89 @@
-import React from "react";
-import { FaFolder, FaFile, FaEllipsisV } from "react-icons/fa";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-type File = {
-  id: string;
-  name: string;
-  type: "file" | "folder";
-  size?: string;
-  modifiedDate: string;
-};
+const FileList = () => {
+  const files = [
+    {
+      name: "Presentation 1",
+      type: "Google Slides",
+      owner: "You",
+      lastModified: "5/24/22, 12:30 PM",
+    },
+    {
+      name: "Vacation photos",
+      type: "JPG",
+      owner: "You",
+      lastModified: "5/23/22, 9:45 AM",
+    },
+    {
+      name: "Budget 2022",
+      type: "XLS",
+      owner: "You",
+      lastModified: "5/21/22, 4:15 PM",
+    },
+    {
+      name: "Project plan",
+      type: "PDF",
+      owner: "You",
+      lastModified: "5/20/22, 2:00 PM",
+    },
+    {
+      name: "Meeting notes",
+      type: "DOCX",
+      owner: "You",
+      lastModified: "5/19/22, 11:00 AM",
+    },
+  ];
 
-const mockFiles: File[] = [
-  { id: "1", name: "Documents", type: "folder", modifiedDate: "2023-04-01" },
-  { id: "2", name: "Images", type: "folder", modifiedDate: "2023-04-02" },
-  {
-    id: "3",
-    name: "report.pdf",
-    type: "file",
-    size: "2.5 MB",
-    modifiedDate: "2023-04-03",
-  },
-  {
-    id: "4",
-    name: "presentation.pptx",
-    type: "file",
-    size: "5.1 MB",
-    modifiedDate: "2023-04-04",
-  },
-];
-
-const FileList: React.FC = () => {
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-md">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-            >
+    <div className="overflow-x-auto">
+      <Table className="min-w-full">
+        <TableHeader className="">
+          <TableRow className="border-b border-gray-300">
+            <TableHead className="px-3 py-5 text-left font-medium">
               Name
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+            </TableHead>
+            <TableHead className="px-3 py-5 text-left font-medium">
+              File type
+            </TableHead>
+            <TableHead className="px-3 py-5 text-left font-medium">
+              Owner
+            </TableHead>
+            <TableHead className="px-3 py-5 text-left font-medium">
+              Last modified
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {files.map((file) => (
+            <TableRow
+              key={file.name}
+              className="border-b border-gray-200 transition-colors duration-150 hover:bg-gray-50"
             >
-              Size
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-            >
-              Modified
-            </th>
-            <th scope="col" className="relative px-6 py-3">
-              <span className="sr-only">Actions</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 bg-white">
-          {mockFiles.map((file) => (
-            <tr key={file.id} className="hover:bg-gray-50">
-              <td className="whitespace-nowrap px-6 py-4">
-                <div className="flex items-center">
-                  {file.type === "folder" ? (
-                    <FaFolder className="h-5 w-5 flex-shrink-0 text-yellow-400" />
-                  ) : (
-                    <FaFile className="h-5 w-5 flex-shrink-0 text-blue-500" />
-                  )}
-                  <span className="ml-4 text-sm font-medium text-gray-900">
-                    {file.name}
-                  </span>
-                </div>
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                {file.size || "-"}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                {file.modifiedDate}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                <button className="text-gray-400 hover:text-gray-500">
-                  <FaEllipsisV />
-                </button>
-              </td>
-            </tr>
+              <TableCell className="px-3 py-5 text-gray-800">
+                {file.name}
+              </TableCell>
+              <TableCell className="px-6 py-4">
+                <span className="rounded-full bg-gray-200 px-4 py-2 text-center text-sm font-semibold text-gray-700">
+                  {file.type}
+                </span>
+              </TableCell>
+              <TableCell className="px-3 py-5 text-gray-600">
+                {file.owner}
+              </TableCell>
+              <TableCell className="px-3 py-5 text-gray-600">
+                {file.lastModified}
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };
