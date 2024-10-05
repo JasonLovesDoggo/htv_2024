@@ -92,3 +92,5 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         }
     }
 });
+
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });

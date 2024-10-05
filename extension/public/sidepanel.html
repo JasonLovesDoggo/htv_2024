@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Side Panel</title>
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+    <div id="drop-zone">
+        <p>📁 Drag and drop files here</p>
+    </div>
+    <ul id="file-list"></ul>
+    <div id="file-details" class="hidden">
+        <div id="file-name-input">
+            <input type="text" id="file-name" placeholder="Enter file name">
+        </div>
+        <div id="storage-suggestions">
+            <h3>Suggested Storage Locations:</h3>
+            <ul>
+                <li class="suggestion">Local Drive (C:)</li>
+                <li class="suggestion">Cloud Storage</li>
+                <li class="suggestion">Network Drive</li>
+            </ul>
+        </div>
+    </div>
+    <script src="sidepanel.js"></script>
+</body>
+</html>

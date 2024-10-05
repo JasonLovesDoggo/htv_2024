@@ -1,0 +1,253 @@
+/* normalize css starts here */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+/* normalize css ends here */
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif;
+  color: #222;
+}
+
+.app {
+  height: 100%;
+  text-align: left;
+  padding: 20px;
+}
+
+.app-heading {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tabs-list {
+  margin: 15px -8px;
+}
+
+.tab-container {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.tab-container:hover {
+  background-color: #fafafa;
+}
+
+.tab-image {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.tab-image-placeholder {
+  font-size: 22px;
+  color: #555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-title {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 12px;
+  text-align: center;
+}
+
+code {
+  font-size: 12px;
+  font-family: inherit;
+  background-color: rgba(254, 237, 185, 0.3);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.divider {
+  margin: 30px auto 25px;
+  width: 50px;
+  border: 0.5px dashed #000;
+  opacity: 0.1;
+}
+
+/* Existing styles... */
+
+/* Reset and base styles */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Drop zone styles */
+#drop-zone {
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+#drop-zone p {
+  color: #007bff;
+  font-size: 18px;
+}
+
+#drop-zone.dragover {
+  background-color: #e6f2ff;
+  border-color: #0056b3;
+}
+
+/* File list styles */
+#file-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+#file-list li {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+#file-list li:hover {
+  background-color: #f8f9fa;
+}
+
+/* File details styles */
+#file-details {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+#file-details.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#file-name-input {
+  margin-bottom: 20px;
+}
+
+#file-name {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+#file-name:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Storage suggestions styles */
+#storage-suggestions h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #495057;
+}
+
+.suggestion {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, background-color 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.suggestion:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent);
+  transition: all 0.6s;
+}
+
+.suggestion:hover:before {
+  left: 100%;
+}
+
+.suggestion.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.suggestion:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+/* Style for the first suggestion */
+.suggestion:first-child {
+  background-color: #e6f2ff;
+  border-color: #007bff;
+  color: #0056b3;
+  font-weight: 500;
+}
+
+.suggestion:first-child:hover {
+  background-color: #cce5ff;
+}
+
+.hidden {
+  display: none;
+}

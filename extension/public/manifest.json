@@ -13,13 +13,16 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Extension",
-    "default_popup": "popup.html"
+    "default_title": "Extension"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "permissions": [
     "storage",
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "sidePanel"
   ],
   "content_scripts": [
     {
