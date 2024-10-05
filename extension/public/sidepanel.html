@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Side Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #drop-zone {
+            border: 3px dashed #ccc;
+            border-radius: 20px;
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        #drop-zone.dragover {
+            background-color: #e1e1e1;
+            border-color: #999;
+        }
+        #drop-zone p {
+            margin: 0;
+            font-size: 18px;
+            color: #666;
+        }
+        #file-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        #file-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="drop-zone">
+        <p>📁 Drag and drop files here</p>
+    </div>
+    <ul id="file-list"></ul>
+    <script src="sidepanel.js"></script>
+</body>
+</html>

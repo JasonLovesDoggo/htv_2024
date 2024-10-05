@@ -74,6 +74,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+export { uploadFile };
 // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 //   console.log("Message received from background:", request);
 

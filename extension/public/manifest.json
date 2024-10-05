@@ -12,14 +12,19 @@
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_title": "Extension",
-    "default_popup": "popup.html"
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
+  "action": {
+    "default_title": "Extension"  
+  },
+
   "permissions": [
     "storage",
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "scripting",
+    "sidePanel"
   ],
   "content_scripts": [
     {
