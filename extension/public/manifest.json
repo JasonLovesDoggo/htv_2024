@@ -23,7 +23,6 @@
     "storage",
     "contextMenus",
     "activeTab",
-    "scripting",
     "sidePanel"
   ],
   "content_scripts": [

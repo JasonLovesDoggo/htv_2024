@@ -92,3 +92,84 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         }
     }
 });
+
+// Add this new object to store file UIDs
+const uploadedFiles = {};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "uploadFile") {
+    // const file = request.file;
+    // const customFileName = request.customFileName || file.name;
+
+    // const upload = new tus.Upload(file, {
+    //   endpoint: TUS_ENDPOINT,
+    //   retryDelays: [0, 3000, 5000, 10000, 20000],
+    //   metadata: {
+    //     filename: customFileName,
+    //     filetype: file.type
+    //   },
+    //   onError: function(error) {
+    //     console.error("Error uploading file:", error);
+    //     sendResponse({ success: false, error: error.message });
+    //   },
+    //   onProgress: function(bytesUploaded, bytesTotal) {
+    //     const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+    //     console.log(bytesUploaded, bytesTotal, percentage + "%");
+    //     // You can send a progress update message here if needed
+    //   },
+    //   onSuccess: function() {
+    //     console.log("File uploaded successfully");
+    //     const fileUrl = upload.url;
+    //     const fileUid = fileUrl.split('/').pop(); // Extract UID from the URL
+    //     uploadedFiles[customFileName] = fileUid;
+    //     sendResponse({ success: true, fileInfo: { name: customFileName, uid: fileUid, url: fileUrl } });
+    //   }
+    // });
+
+    // upload.start();
+    return true;
+  } else if (request.action === "deleteFile") {
+    const fileUid = uploadedFiles[request.fileName];
+    if (!fileUid) {
+      sendResponse({ success: false, error: "File UID not found" });
+      return true;
+    }
+
+    const deleteUrl = `${API_BASE_URL}/delete/${fileUid}`;
+
+    fetch(deleteUrl, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`
+      }
+    })
+      .then(response => {
+        if (response.status === 204) {
+          console.log("File deleted successfully");
+          delete uploadedFiles[request.fileName];
+          sendResponse({ success: true });
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || "Failed to delete file");
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error deleting file:", error);
+        sendResponse({ success: false, error: error.message });
+      });
+
+    return true;
+  } else if (request.action === "getUploadedFiles") {
+    sendResponse({ files: Object.keys(uploadedFiles) });
+    return true;
+  }
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  console.log('Extension installed');
+});
+
+chrome.action.onClicked.addListener((tab) => {
+  chrome.tabs.sendMessage(tab.id, { action: "toggleSidebar" });
+});
