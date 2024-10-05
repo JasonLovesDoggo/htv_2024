@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import ShareModal from "./ShareModal";
 import UploadModal from "./UploadModal";
 
 const ModalProvider = () => {
@@ -22,6 +23,7 @@ const ModalProvider = () => {
       <UploadModal />
       <EditModal />
       <DeleteModal />
+      <ShareModal />
     </>
   );
 };

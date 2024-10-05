@@ -4,14 +4,17 @@ import React from "react";
 import { Share2 } from "lucide-react"; // Use lucide-react icons
 
 import { type File } from "@/lib/data/file";
+import { useModal } from "@/hooks/use-modal";
 
 interface ShareButtonProps {
   file: File;
 }
 
 const ShareButton: React.FC<ShareButtonProps> = ({ file }) => {
+  const modal = useModal();
+
   const handleShare = () => {
-    console.log(`Sharing file: ${file.name}`);
+    modal.onOpen("share", file);
   };
 
   return (

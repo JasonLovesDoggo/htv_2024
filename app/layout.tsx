@@ -7,6 +7,7 @@ import { Space_Grotesk } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { SidebarProvider } from "@/hooks/use-sidebar";
 import EditModal from "@/components/modals/EditModal";
+import ModalProvider from "@/components/modals/ModalProvider";
 import UploadModal from "@/components/modals/UploadModal";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -25,8 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("min-h-svh", spaceGrotesk.className)}>
         <SidebarProvider>
-          <UploadModal />
-          <EditModal />
+          <ModalProvider />
           <div className="flex bg-dots [background-size:32px_32px]">
             <Sidebar />
             <Navbar />

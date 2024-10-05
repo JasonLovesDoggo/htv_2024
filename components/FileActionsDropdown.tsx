@@ -4,6 +4,7 @@ import React from "react";
 import { Edit3, MoreVertical, Share2, Trash2 } from "lucide-react";
 
 import { type File } from "@/lib/data/file";
+import { useModal } from "@/hooks/use-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +21,8 @@ interface FileActionsDropdownProps {
 }
 
 const FileActionsDropdown = ({ file }: FileActionsDropdownProps) => {
+  const modal = useModal();
+
   return (
     <div className="flex items-center justify-center">
       <div className="hidden items-center justify-center space-x-2 xl:flex">
@@ -41,8 +44,8 @@ const FileActionsDropdown = ({ file }: FileActionsDropdownProps) => {
           >
             {/* Edit Action */}
             <DropdownMenuItem
+              onClick={() => modal.onOpen("edit", file)}
               className="flex items-center space-x-2 text-blue-600 hover:bg-black"
-              onClick={() => console.log(`Editing file: ${file.name}`)}
             >
               <Edit3 className="h-4 w-4" />
               <span>Edit</span>
@@ -50,8 +53,8 @@ const FileActionsDropdown = ({ file }: FileActionsDropdownProps) => {
 
             {/* Delete Action */}
             <DropdownMenuItem
+              onClick={() => modal.onOpen("delete", file)}
               className="flex items-center space-x-2 text-red-600 hover:bg-red-500"
-              onClick={() => console.log(`Deleting file: ${file.name}`)}
             >
               <Trash2 className="h-4 w-4" />
               <span>Delete</span>
@@ -59,8 +62,8 @@ const FileActionsDropdown = ({ file }: FileActionsDropdownProps) => {
 
             {/* Share Action */}
             <DropdownMenuItem
+              onClick={() => modal.onOpen("share", file)}
               className="flex items-center space-x-2 text-green-600 hover:bg-green-50"
-              onClick={() => console.log(`Sharing file: ${file.name}`)}
             >
               <Share2 className="h-4 w-4" />
               <span>Share</span>
