@@ -3,12 +3,21 @@ import FileList from "@/components/FileList";
 import SearchBar from "@/components/SearchBar";
 import UploadButton from "@/components/UploadButton";
 
-export default function Files() {
+interface PageProps {
+  searchParams: {
+    search?: string;
+    filter?: string;
+  };
+}
+
+export default function Files({
+  searchParams: { search = "", filter = "" },
+}: PageProps) {
   return (
     <div className="">
       <div className="flex w-full items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Files</h1>
+          <h1 className="text-3xl font-bold">Files</h1>
           <p className="text-lg text-gray-600">
             View and manage all your files from one central location.
           </p>
@@ -19,7 +28,7 @@ export default function Files() {
       <div className="mt-6 space-y-6">
         <SearchBar />
         <FileFilters />
-        <FileList />
+        <FileList search={search} filter={filter} />
       </div>
     </div>
   );

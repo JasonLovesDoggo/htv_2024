@@ -23,11 +23,11 @@ export default function RootLayout({
       <body className={cn("min-h-svh", spaceGrotesk.className)}>
         <SidebarProvider>
           <UploadModal />
-          <div className="flex">
+          <div className="bg-dots flex [background-size:32px_32px]">
             <Sidebar />
-            <main className="flex min-h-svh flex-1 flex-col rounded-lg p-6 md:p-8 md:pl-80 lg:p-12 lg:pl-80">
+            <main className="flex max-h-svh min-h-svh flex-1 flex-col overflow-hidden rounded-lg p-6 md:p-8 md:pl-80 lg:p-12 lg:pl-80">
               <Navbar />
-              <div className="flex-1 rounded-2xl border bg-zinc-50 p-8 lg:p-12">
+              <div className="flex-1 overflow-y-auto rounded-2xl border bg-zinc-50 p-8 lg:p-12">
                 {children}
               </div>
             </main>
