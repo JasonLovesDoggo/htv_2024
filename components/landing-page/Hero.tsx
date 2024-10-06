@@ -26,7 +26,7 @@ const Hero = () => {
               file storage
             </h1>
             <p className="mb-8 text-xl">
-              "Unmatched speed and security—file storage made easier than ever!"
+              Unmatched speed and security—file storage made easier than ever!
             </p>
             <Link
               href="/files"

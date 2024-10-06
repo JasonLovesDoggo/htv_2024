@@ -2,29 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import copy from "clipboard-copy";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { File } from "@/lib/data/file";
-import { getFileUrl } from "@/lib/s3";
+import { FileType } from "@/lib/data/file";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-
-const shareFileSchema = z.object({});
 
 type ShareFormProps = {
-  file: File;
+  file: FileType;
   onClose: () => void;
 };
 

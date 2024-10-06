@@ -20,7 +20,9 @@ const Navbar = () => {
           <Link href="#" className="text-gray-600 hover:text-gray-900">
             Community
           </Link>
-          <Button>Get Started</Button>
+          <Button>
+            <Link href={"/dashboard"}>Get Started</Link>
+          </Button>
         </div>
       </div>
     </nav>
