@@ -29,7 +29,10 @@ const Footer: React.FC = () => {
             >
               Contact Us
             </Link>
-            <Link href={""}>
+            <Link
+              href={"https://github.com/JasonLovesDoggo/htv_2024"}
+              target="_blank"
+            >
               <Github />
             </Link>
           </nav>
