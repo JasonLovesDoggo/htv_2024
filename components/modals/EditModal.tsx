@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { Clock, User, Users } from "lucide-react";
 
 import { useModal } from "@/hooks/use-modal";
@@ -66,8 +67,7 @@ const EditModal = () => {
         </div>
         {file && (
           <EditFileForm
-            fileId={file.id}
-            defaultFileName={file.name}
+            fileName={file.name}
             onClose={modal.onClose}
             onSuccess={handleEditSuccess}
           />

@@ -1,9 +1,9 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { editFileSchema } from "@/lib/validators/file";
 import { Button } from "@/components/ui/button";
@@ -18,48 +18,52 @@ import {
 import { Input } from "@/components/ui/input";
 
 type EditFileFormProps = {
-  fileId: string;
-  defaultFileName: string;
+  fileName: string;
   onClose: () => void;
   onSuccess: (updatedFile: { id: string; name: string }) => void;
 };
 
 const EditFileForm: React.FC<EditFileFormProps> = ({
-  fileId,
-  defaultFileName,
   onClose,
   onSuccess,
+  fileName,
 }) => {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(editFileSchema),
     defaultValues: {
-      name: defaultFileName,
+      name: fileName,
     },
   });
 
   const handleSubmit = async (values: { name: string }) => {
     startTransition(async () => {
       try {
-        const response = await fetch("/api/file", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+        // Make the PUT request to rename the file
+        const response = await fetch(
+          `/api/file?oldName=${encodeURIComponent(fileName)}&newName=${encodeURIComponent(values.name)}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-          body: JSON.stringify({ id: fileId, name: values.name }),
-        });
+        );
+        console.log("Response:", response);
 
         if (!response.ok) {
-          throw new Error("Failed to update file name");
+          throw new Error("Failed to rename file");
         }
 
         const updatedFile = await response.json();
 
         onSuccess({ id: updatedFile.id, name: updatedFile.name });
         onClose();
+        router.refresh();
       } catch (err) {
-        console.log("Error updating file name:", err);
+        console.log("Error renaming file:", err);
       }
     });
   };
