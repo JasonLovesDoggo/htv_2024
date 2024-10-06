@@ -1,16 +1,14 @@
 "use server";
 
 import { NextRequest, NextResponse } from "next/server";
-import { blobToBase64 } from "@/utils/utils";
-import blobUtil from "blob-util";
 import xml2js from "xml2js";
 
-import { filterByName } from "@/lib/validators/file";
+import { filterByCategory } from "@/lib/validators/file";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const temp = await request.json();
-    const input = await filterByName.parse(temp);
+    const input = await filterByCategory.parse(temp);
     const response = await fetch(`http://localhost:9000/first-bucket`);
     const xml = await response.text();
     let finalResult;
@@ -22,10 +20,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
       const tempResults = [];
       for (let i = 0; i < limit; i++) {
         if (k >= limit) break;
-        console.log(results[i]);
-        console.log(results[i]["Owner"]);
         const file_paths = results[i].Key[0].split("/")
-        if (file_paths[file_paths.length - 1] === input.name) {
+        if (file_paths.slice(0, file_paths.length - 1).includes(input.category)) {
           const currentResult = results[i];
           const formattedResult = {
             Key: currentResult.Key[0],
@@ -37,13 +33,13 @@ export async function POST(request: NextRequest, response: NextResponse) {
             Size: Number(currentResult.Size[0]),
           };
           tempResults.push(formattedResult);
-          k += 1;
+          k += 1
         }
       }
       finalResult = tempResults;
     });
     return new Response(
-      JSON.stringify({ success: true, images: finalResult }),
+      JSON.stringify({ success: true, categories: finalResult }),
       {
         status: 200,
         headers: {
@@ -52,12 +48,15 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
     );
   } catch (e) {
-    console.error("Error filtering by name:", e);
-    return new Response(JSON.stringify({ error: "Failed to filter by name" }), {
-      status: 400,
-      headers: {
-        "Content-Type": "application/json",
+    console.error("Error filtering by category:", e);
+    return new Response(
+      JSON.stringify({ error: "Failed to filter by category" }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
   }
 }
