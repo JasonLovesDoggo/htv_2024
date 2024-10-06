@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { Share2 } from "lucide-react"; // Use lucide-react icons
+import { Share2 } from "lucide-react";
 
-import { type File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 
 interface ShareButtonProps {
-  file: File;
+  file: FileType;
 }
 
 const ShareButton: React.FC<ShareButtonProps> = ({ file }) => {

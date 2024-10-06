@@ -81,7 +81,7 @@ export const getFileUrl = (key: string) => {
   return s3.getSignedUrl("getObject", {
     ...params,
     Key: key,
-    Expires: 60 * 5, // URL expires in 5 minutes
+    Expires: 60 * 5,
   });
 };
 

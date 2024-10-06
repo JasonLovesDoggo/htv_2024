@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between bg-gray-100 px-4 py-3 shadow-md md:hidden">
+    <nav className="z-50 flex h-16 w-full items-center justify-between bg-gray-800 px-4 py-3 shadow-md md:hidden">
       <div className="flex items-center">
         <span className="ml-2 text-lg font-bold text-gray-800">
           File Storage

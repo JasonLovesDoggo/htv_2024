@@ -1,9 +1,10 @@
-// app/api/file/download/route.ts
 import { NextResponse } from "next/server";
+
+import { getFileUrl } from "@/lib/s3";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const fileName = searchParams.get("name"); // Get the file name from query string
+  const fileName = searchParams.get("name");
 
   if (!fileName) {
     return NextResponse.json(
@@ -13,29 +14,23 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Construct the file URL from MinIO
-    const fileUrl = `http://127.0.0.1:9000/first-bucket/${encodeURIComponent(fileName)}`;
-
-    // Fetch the file from MinIO using fetch
+    const fileUrl = getFileUrl(fileName);
     const fileResponse = await fetch(fileUrl);
 
     if (!fileResponse.ok) {
       return NextResponse.json(
-        { message: "Error fetching file from MinIO" },
+        { message: "Error fetching file from Storage" },
         { status: 500 },
       );
     }
 
-    // Get the content type from the file response
     const contentType =
       fileResponse.headers.get("content-type") || "application/octet-stream";
 
-    // Set headers for download
     const headers = new Headers();
     headers.append("Content-Disposition", `attachment; filename="${fileName}"`);
     headers.append("Content-Type", contentType);
 
-    // Return the file stream as the response
     return new NextResponse(fileResponse.body, {
       headers,
       status: 200,
