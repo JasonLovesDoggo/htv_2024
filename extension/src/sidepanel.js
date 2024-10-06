@@ -5,9 +5,9 @@ import { uploadFile } from './background.js';
 
 let dropCount = 0;
 const suggestionSets = [
-    ['work', 'TODO', 'other'],
-    ['cat', 'pet', 'leisure'],
-    ['pet', 'leisure', 'nature']
+    ['work', 'TODO', 'main'],
+    ['cat', 'pet', 'main'],
+    ['pet', 'leisure', 'main']
 ];
 
 export const apiRoot = async () => {
