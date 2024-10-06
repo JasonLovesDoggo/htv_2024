@@ -35,3 +35,64 @@ export const serverUrlSchema = z.object({
 });
 
 export type ServerUrlFormValues = z.infer<typeof serverUrlSchema>;
+
+// POST
+// /api/filter/name
+export const filterByName = z.object({
+  limit: z.number().optional(), // 0 for unlimited. It's also int.
+});
+
+// POST
+// /api/filter/category
+export const filterByCategory = z.object({
+  limit: z.number().optional(), // 0 for unlimited. It's also int.
+});
+
+// POST
+// /api/order/file-size
+export const orderByFileSize = z.object({
+  limit: z.number().optional(), // 0 for unlimited. It's also int.
+  largestFirst: z.boolean().optional(), // Can't have both at the same time.
+  leastFirst: z.boolean().optional(), // Can't have both at the same time.
+});
+
+// POST
+// /api/order/uploaded-date
+export const orderByUploadedDate = z.object({
+  limit: z.number().optional(), // 0 for unlimited
+  latestFirst: z.boolean().optional(), // Can't have both at the same time.
+  earlielargestFirststFirst: z.boolean().optional(), // Can't have both at the same time.
+});
+
+// POST
+// /api/create/file
+export const createFile = z
+  .object({
+    name: z.string(),
+  })
+  .strict();
+
+// POST
+// /api/create/folder
+// Not sure if we need it but just in case.
+export const createFolder = z
+  .object({
+    name: z.string(),
+  })
+  .strict();
+
+// POST
+// /api/share/file
+// this is temporary so this might be be changed.
+export const shareFile = z.object({
+  password: z.string().min(8).optional(),
+  nuses: z.number().optional(), // 0 menas unlimited and it's also int
+});
+
+// POST
+// /api/share/folder
+// this is temporary so this might be be changed.
+export const shareFolder = z.object({
+  password: z.string().min(8).optional(),
+  nuses: z.number().optional(), // 0 menas unlimited and it's also int
+});
