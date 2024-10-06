@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import xml2js from "xml2js";
 import { z } from "zod";
 
+import { serverUrl } from "@/lib/config/site";
 import { uploadSchema } from "@/lib/validators/file";
 
 export async function GET() {
@@ -101,7 +102,7 @@ export async function DELETE(request: Request) {
   try {
     const body = await request.json();
     const validatedFields = await z
-      .object({ id: z.string().trim().min(1).max(100) })
+      .object({ fileName: z.string().trim().min(1).max(100) })
       .safeParse(body);
 
     if (!validatedFields.success) {
@@ -113,8 +114,14 @@ export async function DELETE(request: Request) {
       });
     }
 
-    console.log("Deleting file:", validatedFields.data.id);
-    // TODO: Delete file from the database/file system
+    await fetch(
+      `${serverUrl}/${encodeURIComponent(validatedFields.data.fileName)}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    revalidatePath("/files");
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

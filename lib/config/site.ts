@@ -19,3 +19,5 @@ export const navLinks: NavLink[] = [
   { href: "/files", label: "Files", icon: Folder },
   { href: "/shared", label: "Shared", icon: Users },
 ];
+
+export const serverUrl = "http://127.0.0.1:9000/first-bucket";

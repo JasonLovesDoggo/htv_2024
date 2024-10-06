@@ -1,4 +1,6 @@
+import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { File } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
@@ -13,23 +15,49 @@ import {
 
 const DeleteModal = () => {
   const modal = useModal();
+  const router = useRouter();
 
   const isOpen = modal.isOpen && modal.modalType === "delete";
   const file = modal.data;
 
-  const handleDelete = () => {
-    // TODO: Call an API endpoint to delete the file
+  const handleDelete = async () => {
+    if (!file) {
+      return modal.onClose();
+    }
 
-    const storedFiles = localStorage.getItem("files");
-    const files = storedFiles ? JSON.parse(storedFiles) : [];
+    try {
+      await fetch("/api/file", {
+        body: JSON.stringify({ fileName: file.name }),
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const filteredFiles = files.filter((f: File) => f.id !== file?.id);
+      toast.success("File deleted successfully.");
+      router.refresh();
+      modal.onClose();
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
 
-    localStorage.setItem("files", JSON.stringify(filteredFiles));
+    // const serverUrl = `http://127.0.0.1:9000/first-bucket`;
 
-    console.log(`File ${file?.name} deleted.`);
+    // // Delete the file from the server
+    // const res = await fetch(`${serverUrl}/${encodeURIComponent(file.name)}`, {
+    //   method: "DELETE",
+    // });
 
-    modal.onClose();
+    // console.log("Response:", res);
+
+    // if (!res.ok) {
+    //   throw new Error("Failed to delete file");
+    // }
+
+    // console.log(`File ${file?.name} deleted.`);
+
+    // modal.onClose();
   };
 
   return (
