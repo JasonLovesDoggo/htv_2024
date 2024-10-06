@@ -1,11 +1,11 @@
-export interface File {
-  id: string;
+import { listObjects, Object } from "../s3";
+
+export interface FileType {
   name: string;
-  type: "image" | "video" | "audio" | "document" | "other" | "folder";
-  owner: string;
-  lastModified: string;
-  url: string;
+  lastModified: Date;
   size: number;
+  url: string;
+  type: "image" | "video" | "audio" | "document" | "other" | "folder";
 }
 
 export const getFiles = async (
@@ -14,21 +14,18 @@ export const getFiles = async (
   filterBy: string,
 ) => {
   try {
-    const response = await fetch("http://localhost:3000/api/file");
-    const { contents } = await response.json();
+    const contents = await listObjects();
 
-    const files = contents.map((file: any) => ({
-      id: file.Key[0],
-      name: file.Key[0],
-      type: getFileType(file.Key[0]),
-      owner: file.Owner[0].DisplayName[0],
-      lastModified: file.LastModified[0],
-      size: file.Size[0],
-      url: `http://127.0.0.1:9000/first-bucket/${encodeURIComponent(file.Key[0])}`,
+    const files: FileType[] = contents.map((content: Object) => ({
+      name: content.Key,
+      lastModified: new Date(content.LastModified),
+      size: content.Size,
+      url: `http://127.0.0.1:9000/first-bucket/${encodeURIComponent(content.Key)}`,
+      type: getFileType(content.Key),
     }));
 
     // Filter files based on search and filter conditions
-    const filteredFiles = files.filter((file: File) => {
+    const filteredFiles = files.filter((file: FileType) => {
       const matchesSearch = file.name
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -56,7 +53,7 @@ export const getFiles = async (
   }
 };
 
-function getFileType(filePath: string): File["type"] {
+function getFileType(filePath: string): FileType["type"] {
   const parts = filePath.split("/");
   const fileName = parts[parts.length - 1];
 

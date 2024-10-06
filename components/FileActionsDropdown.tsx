@@ -3,7 +3,7 @@
 import React from "react";
 import { Edit3, MoreVertical, Share2, Trash2 } from "lucide-react";
 
-import { type File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 import {
   DropdownMenu,
@@ -17,7 +17,7 @@ import EditButton from "./EditButton";
 import ShareButton from "./ShareButton";
 
 interface FileActionsDropdownProps {
-  file: File;
+  file: FileType;
 }
 
 const FileActionsDropdown = ({ file }: FileActionsDropdownProps) => {

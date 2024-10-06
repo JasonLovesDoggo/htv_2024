@@ -1,6 +1,6 @@
 import React from "react";
 
-import { File, getFiles } from "@/lib/data/file";
+import { FileType, getFiles } from "@/lib/data/file";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 import FileListHeader from "./FileListHeader";
@@ -14,7 +14,7 @@ interface FileListProps {
 }
 
 interface FolderStructure {
-  [key: string]: FolderStructure | File;
+  [key: string]: FolderStructure | FileType;
 }
 
 const FileList = async ({ search, filter, filterBy }: FileListProps) => {
@@ -32,7 +32,7 @@ const FileList = async ({ search, filter, filterBy }: FileListProps) => {
   );
 };
 
-const organizeFiles = (files: File[]): FolderStructure => {
+const organizeFiles = (files: FileType[]): FolderStructure => {
   const structure: FolderStructure = {};
 
   files.forEach((file) => {
@@ -63,7 +63,7 @@ const FileListTable = ({
     <TableHeader>
       <FileListHeader />
     </TableHeader>
-    <TableBody>
+    <TableBody className="space-y-1">
       <RenderFolder structure={folderStructure} level={0} />
     </TableBody>
   </Table>
@@ -81,20 +81,16 @@ const RenderFolder = ({
       {Object.entries(structure).map(([name, item]) => {
         if (isFile(item)) {
           return (
-            <FileRow key={item.id} file={item} level={level} isFolder={false} />
+            <FileRow key={name} file={item} level={level} isFolder={false} />
           );
         } else {
           const folderFiles = Object.values(item).filter(isFile);
           const latestModifiedFile = folderFiles.reduce((latest, file) =>
-            new Date(file.lastModified) > new Date(latest.lastModified)
-              ? file
-              : latest,
+            file.lastModified > latest.lastModified ? file : latest,
           );
-          const folderFile: File = {
-            id: name,
+          const folderFile: FileType = {
             name,
             type: "folder",
-            owner: "",
             lastModified: latestModifiedFile.lastModified,
             url: "",
             size: 0,
@@ -110,9 +106,9 @@ const RenderFolder = ({
   );
 };
 
-// Type guard to check if an item is a File
-function isFile(item: FolderStructure | File): item is File {
-  return (item as File).url !== undefined;
+// Type guard to check if an item is a FileType
+function isFile(item: FolderStructure | FileType): item is FileType {
+  return (item as FileType).url !== undefined;
 }
 
 export default FileList;

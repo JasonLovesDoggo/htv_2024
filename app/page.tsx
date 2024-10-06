@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FaFolder, FaShareAlt, FaUpload } from "react-icons/fa";
 
+import UploadButton from "@/components/UploadButton";
+
 export default function Home() {
   return (
     <div className="space-y-6">
@@ -37,13 +39,15 @@ export default function Home() {
             <p className="text-gray-600">Access files shared with you</p>
           </div>
         </Link>
-        <button className="flex items-center rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
-          <FaUpload className="mr-4 text-3xl text-purple-500" />
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800">Upload</h2>
-            <p className="text-gray-600">Upload new files to your storage</p>
-          </div>
-        </button>
+        <UploadButton className="rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
+          <button className="flex items-center">
+            <FaUpload className="mr-4 text-3xl text-purple-500" />
+            <div className="text-left">
+              <h2 className="text-xl font-semibold text-gray-800">Upload</h2>
+              <p className="text-gray-600">Upload new files to your storage</p>
+            </div>
+          </button>
+        </UploadButton>
       </div>
 
       <div className="mt-8">
