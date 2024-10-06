@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { Github } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Footer: React.FC = () => {
           <p className="text-sm text-gray-500">
             © 2024 File Storage Dashboard. All rights reserved.
           </p>
-          <nav className="flex space-x-4">
+          <nav className="flex items-center space-x-8">
             <Link
               href="/privacy"
               className="text-sm text-gray-500 hover:text-gray-700"
@@ -27,6 +28,9 @@ const Footer: React.FC = () => {
               className="text-sm text-gray-500 hover:text-gray-700"
             >
               Contact Us
+            </Link>
+            <Link href={""}>
+              <Github />
             </Link>
           </nav>
         </div>
