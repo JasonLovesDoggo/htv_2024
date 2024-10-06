@@ -12,11 +12,11 @@ const ServerUrlProvider = () => {
   useEffect(() => {
     const storedServerUrl = localStorage.getItem("serverUrl");
 
-    if (!serverUrl && !storedServerUrl) {
-      modal.onOpen("serverUrl");
-    } else if (storedServerUrl && !serverUrl) {
-      setServerUrl(storedServerUrl);
-    }
+    // if (!serverUrl && !storedServerUrl) {
+    //   modal.onOpen("serverUrl");
+    // } else if (storedServerUrl && !serverUrl) {
+    //   setServerUrl(storedServerUrl);
+    // }
   }, [modal.isOpen]);
 
   return null;

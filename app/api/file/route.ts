@@ -5,7 +5,6 @@ import xml2js from "xml2js";
 import { z } from "zod";
 
 import { serverUrl } from "@/lib/config/site";
-import { uploadSchema } from "@/lib/validators/file";
 
 export async function GET() {
   try {

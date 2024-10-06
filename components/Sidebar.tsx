@@ -19,7 +19,9 @@ const Sidebar: React.FC = () => {
       {/* Logo */}
       <Link href="/" className="mb-12 flex items-center gap-2.5">
         <Vault strokeWidth={2.5} className="size-7 text-rose-500" />
-        <h1 className="text-xl font-bold text-gray-800">SwiftLock</h1>
+        <h1 className="text-xl font-black tracking-widest text-gray-800 md:text-2xl">
+          PUT
+        </h1>
       </Link>
 
       {/* Navigation Links */}

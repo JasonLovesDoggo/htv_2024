@@ -7,11 +7,12 @@ interface PageProps {
   searchParams: {
     search?: string;
     filter?: string;
+    filterBy?: string;
   };
 }
 
 export default function Files({
-  searchParams: { search = "", filter = "" },
+  searchParams: { search = "", filter = "", filterBy = "" },
 }: PageProps) {
   return (
     <div className="">
@@ -28,7 +29,7 @@ export default function Files({
       <div className="mt-6 space-y-6">
         <SearchBar />
         <FileFilters />
-        <FileList search={search} filter={filter} />
+        <FileList search={search} filter={filter} filterBy={filterBy} />
       </div>
     </div>
   );
