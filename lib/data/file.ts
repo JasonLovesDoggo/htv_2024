@@ -20,7 +20,7 @@ export const getFiles = async (
       name: content.Key,
       lastModified: new Date(content.LastModified),
       size: content.Size,
-      url: `http://127.0.0.1:9000/first-bucket/${encodeURIComponent(content.Key)}`,
+      url: `${process.env.SERVER_URL}/${encodeURIComponent(content.Key)}`,
       type: getFileType(content.Key),
     }));
 

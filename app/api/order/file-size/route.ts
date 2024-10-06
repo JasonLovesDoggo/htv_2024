@@ -17,7 +17,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       throw Error(
         "Request must either have ascending be true or descending be true",
       );
-    const response = await fetch(`http://localhost:9000/first-bucket`);
+    const response = await fetch(`${process.env.SERVER_URL}`);
     const xml = await response.text();
     let finalResult;
     let limit = input.limit ?? 5;

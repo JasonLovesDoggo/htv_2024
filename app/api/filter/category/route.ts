@@ -9,7 +9,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const temp = await request.json();
     const input = await filterByCategory.parse(temp);
-    const response = await fetch(`http://localhost:9000/first-bucket`);
+    const response = await fetch(`${process.env.SERVER_URL}`);
     const xml = await response.text();
     let finalResult;
     xml2js.parseString(xml, (err, result) => {
