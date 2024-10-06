@@ -245,18 +245,43 @@ body {
 }
 
 #global-input-container {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     display: flex;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
 }
 
 #global-input {
     flex-grow: 1;
-    margin-right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
     padding: 5px;
+    outline: none;
+    margin-right: 10px;
 }
 
 #set-global-button {
-    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#set-global-button:hover {
+    background-color: #45a049;
 }
 
 @keyframes fadeInOut {
