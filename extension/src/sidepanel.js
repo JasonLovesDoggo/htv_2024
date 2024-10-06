@@ -70,7 +70,6 @@ if (typeof document !== 'undefined') {
                 const li = document.createElement('li');
                 console.log('File:', file.name, 'Type:', file.type, 'Size:', file.size);
                 li.textContent = file.name;
-                fileList.appendChild(li);
                 uploadFile(file)
             });
 
@@ -91,7 +90,14 @@ if (typeof document !== 'undefined') {
                 console.log(`Uploading file: ${fileName} to ${location}`);
                 // Here you would call your upload function with the file and location
                 // uploadFile(file, fileName, location);
-
+                // Update the drop zone color to green for 2 seconds
+                const dropZone = document.getElementById('drop-zone');
+                if (dropZone) {
+                    dropZone.style.backgroundColor = 'rgba(0, 128, 0, 0.5)';;
+                    setTimeout(() => {
+                        dropZone.style.backgroundColor = ''; // Reset to default color
+                    }, 2000);
+                }
                 // Hide file details and storage suggestions
                 fileDetails.classList.add('hidden');
                 fileDetails.classList.remove('show');
