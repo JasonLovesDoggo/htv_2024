@@ -32,6 +32,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
             ),
             Size: Number(currentResult.Size[0]),
           };
+          // @ts-ignore
           tempResults.push(formattedResult);
           k += 1
         }
