@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadCloud } from "lucide-react";
 import { useDropzone } from "react-dropzone";
@@ -27,6 +28,7 @@ interface UploadFormProps {
 
 const UploadForm: React.FC<UploadFormProps> = ({ initialValues, onClose }) => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const form = useForm<UploadFormSchema>({
     resolver: zodResolver(uploadSchema),
@@ -53,15 +55,31 @@ const UploadForm: React.FC<UploadFormProps> = ({ initialValues, onClose }) => {
     multiple: false,
   });
 
-  const handleUpload = (values: UploadFormSchema) => {
-    console.log("Uploading file:", values.file.name);
-    console.log("File name:", values.name);
+  const handleUpload = async (values: UploadFormSchema) => {
+    try {
+      const formData = new FormData();
 
-    localStorage.setItem("uploadedFile", JSON.stringify(values));
+      formData.append("file", values.file);
+      formData.append("name", values.name);
 
-    form.reset();
-    setUploadedFile(null);
-    onClose();
+      const res = await fetch("/api/file", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to upload file");
+      }
+
+      console.log("File uploaded successfully:", res);
+
+      form.reset();
+      setUploadedFile(null);
+      onClose();
+      router.refresh();
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   };
 
   return (
@@ -101,7 +119,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ initialValues, onClose }) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter file name" {...field} />
+                <Input {...field} placeholder="Enter file name" />
               </FormControl>
               <FormMessage />
             </FormItem>

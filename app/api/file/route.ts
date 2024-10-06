@@ -54,20 +54,31 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const validatedFields = await uploadSchema.safeParse(body);
+    const formData = await request.formData();
 
-    if (!validatedFields.success) {
-      return new Response(JSON.stringify(validatedFields.error), {
+    const file = formData.get("file") as File;
+
+    if (!file) {
+      return new Response(JSON.stringify({ error: "No file found" }), {
         status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
     }
 
-    console.log("File uploaded:", body);
-    // TODO: Add to the database/storage
+    const uploadUrl = `http://127.0.0.1:9000/first-bucket/${encodeURIComponent(formData.get("name") as string)}`;
+
+    const response = await fetch(uploadUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload file");
+    }
+
+    revalidatePath("/files");
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
