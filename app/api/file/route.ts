@@ -8,7 +8,7 @@ import { serverUrl } from "@/lib/config/site";
 
 export async function GET() {
   try {
-    const response = await fetch("http://127.0.0.1:9000/first-bucket");
+    const response = await fetch(serverUrl + "/files/upload");
 
     let contents;
 
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const body = await request.json();
-    const validatedFields = await z
+    const validatedFields =  z
       .object({ fileName: z.string().trim().min(1).max(100) })
       .safeParse(body);
 
