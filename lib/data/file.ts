@@ -8,7 +8,11 @@ export interface File {
   size: number;
 }
 
-export const getFiles = async (search: string, filter: string) => {
+export const getFiles = async (
+  search: string,
+  filter: string,
+  filterBy: string,
+) => {
   try {
     const response = await fetch("http://localhost:3000/api/file");
     const { contents } = await response.json();
@@ -32,7 +36,20 @@ export const getFiles = async (search: string, filter: string) => {
       return matchesSearch && matchesFilter;
     });
 
-    return filteredFiles;
+    let sortedFiles;
+    if (filterBy === "name") {
+      sortedFiles = filteredFiles.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (filterBy === "type") {
+      sortedFiles = filteredFiles.sort((a, b) => a.type.localeCompare(b.type));
+    } else {
+      sortedFiles = filteredFiles.sort(
+        (a, b) =>
+          new Date(b.lastModified).getTime() -
+          new Date(a.lastModified).getTime(),
+      );
+    }
+
+    return sortedFiles;
   } catch (error) {
     console.error("Error fetching files:", error);
     return [];

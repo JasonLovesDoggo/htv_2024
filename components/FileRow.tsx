@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 import { type File } from "@/lib/data/file";
 import { cn, formatReadableDate } from "@/lib/utils";
@@ -26,10 +27,13 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
     <>
       {/* TableRow content */}
       <TableRow
+        onClick={isFolder ? handleToggle : undefined}
+        role={isFolder ? "button" : undefined}
         className={cn(
           "grid w-full grid-cols-4 items-center gap-4 border-b border-gray-200 transition-colors duration-150",
           {
             "hover:bg-gray-50": !isFolder,
+            "cursor-pointer bg-green-400 hover:bg-green-500": isFolder,
           },
         )}
         style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
@@ -40,15 +44,15 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
             style={{ paddingLeft: `${level * 20}px` }}
           >
             {isFolder ? (
-              <button
-                onClick={handleToggle}
-                className="flex items-center focus:outline-none"
-              >
-                {/* Expand/Collapse Icon */}
-                <span className={cn("mr-2", { "rotate-90": isExpanded })}>
-                  ▼
+              <button className="flex items-center focus:outline-none">
+                <span
+                  className={cn("mr-2 transition-transform", {
+                    "rotate-180": isExpanded,
+                  })}
+                >
+                  <ChevronDown className="h-4 w-4" />
                 </span>
-                <p>{file.name}</p>
+                <p className="text-black">{file.name}</p>
               </button>
             ) : (
               <a
@@ -69,7 +73,7 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
             className={cn(
               "rounded-full bg-gray-100 px-4 py-1 text-sm font-semibold capitalize text-gray-700",
               {
-                "bg-zinc-900 text-rose-400": file.type === "folder",
+                "bg-green-200 text-black": file.type === "folder",
               },
             )}
           >

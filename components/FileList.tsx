@@ -1,28 +1,24 @@
 import React from "react";
 
 import { File, getFiles } from "@/lib/data/file";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
+import FileListHeader from "./FileListHeader";
 import FileRow from "./FileRow";
 import NoFilesFound from "./NoFilesFound";
 
 interface FileListProps {
   search: string;
   filter: string;
+  filterBy: string;
 }
 
 interface FolderStructure {
   [key: string]: FolderStructure | File;
 }
 
-const FileList = async ({ search, filter }: FileListProps) => {
-  const filteredFiles = await getFiles(search, filter);
+const FileList = async ({ search, filter, filterBy }: FileListProps) => {
+  const filteredFiles = await getFiles(search, filter, filterBy);
   const folderStructure = organizeFiles(filteredFiles);
 
   return (
@@ -65,19 +61,7 @@ const FileListTable = ({
 }) => (
   <Table className="min-w-full">
     <TableHeader>
-      <TableRow
-        className="grid grid-cols-4 gap-4 border-b border-gray-300 bg-gray-50 hover:bg-gray-200"
-        style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
-      >
-        <TableHead className="px-3 text-left font-medium">Name</TableHead>
-        <TableHead className="px-3 text-center font-medium">
-          File type
-        </TableHead>
-        <TableHead className="px-3 text-center font-medium">
-          Last modified
-        </TableHead>
-        <TableHead className="px-3 text-left font-medium">Actions</TableHead>
-      </TableRow>
+      <FileListHeader />
     </TableHeader>
     <TableBody>
       <RenderFolder structure={folderStructure} level={0} />
@@ -100,12 +84,18 @@ const RenderFolder = ({
             <FileRow key={item.id} file={item} level={level} isFolder={false} />
           );
         } else {
+          const folderFiles = Object.values(item).filter(isFile);
+          const latestModifiedFile = folderFiles.reduce((latest, file) =>
+            new Date(file.lastModified) > new Date(latest.lastModified)
+              ? file
+              : latest,
+          );
           const folderFile: File = {
             id: name,
             name,
             type: "folder",
             owner: "",
-            lastModified: new Date().toISOString(),
+            lastModified: latestModifiedFile.lastModified,
             url: "",
             size: 0,
           };
