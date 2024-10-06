@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
+import { serverUrl } from "@/lib/config/site";
 import { type FileType } from "@/lib/data/file";
 import { cn, formatFileSize, formatReadableDate } from "@/lib/utils";
 import { TableCell, TableRow } from "@/components/ui/table";
@@ -56,14 +57,23 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
                 <p className="text-black">{file.name}</p>
               </button>
             ) : (
-              <a
-                href={`/api/file/download?name=${file.name}`}
-                target="_blank"
-                className="text-blue-600 hover:underline"
-                download={`/api/file/download?name=${file.name}`}
-              >
-                {file.name.split("/").pop()}
-              </a>
+              <div className="flex items-center gap-2">
+                <a
+                  href={`/api/file/download?name=${file.name}`}
+                  target="_blank"
+                  className="text-blue-600 hover:underline"
+                  download={`/api/file/download?name=${file.name}`}
+                >
+                  {file.name.split("/").pop()}
+                </a>
+                <a
+                  href={`${serverUrl}/${file.name}`}
+                  target="_blank"
+                  className="text-[10px] text-gray-500 hover:text-black"
+                >
+                  PREVIEW
+                </a>
+              </div>
             )}
           </div>
         </TableCell>
