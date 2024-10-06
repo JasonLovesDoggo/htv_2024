@@ -14,14 +14,17 @@ const FileListHeader = ({}: Props) => {
 
   return (
     <TableRow
-      className="grid grid-cols-4 gap-4 border-b border-gray-300 bg-gray-50 hover:bg-gray-200"
-      style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
+      className="grid grid-cols-5 gap-4 border-b border-gray-300 bg-gray-50 hover:bg-gray-200"
+      style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
     >
       <TableHead className="px-3 text-left font-medium">
         <button onClick={handleClick("name")}>Name</button>
       </TableHead>
       <TableHead className="px-3 text-center font-medium">
         <button onClick={handleClick("type")}>File type</button>
+      </TableHead>
+      <TableHead className="px-3 text-center font-medium">
+        <button onClick={handleClick("size")}>Size</button>
       </TableHead>
       <TableHead className="px-3 text-center font-medium">
         <button onClick={handleClick("lastModified")}>Last modified</button>

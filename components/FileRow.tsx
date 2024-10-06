@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 import { type FileType } from "@/lib/data/file";
-import { cn, formatReadableDate } from "@/lib/utils";
+import { cn, formatFileSize, formatReadableDate } from "@/lib/utils";
 import { TableCell, TableRow } from "@/components/ui/table";
 
 import FileActionsDropdown from "./FileActionsDropdown";
@@ -30,14 +30,14 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
         onClick={isFolder ? handleToggle : undefined}
         role={isFolder ? "button" : undefined}
         className={cn(
-          "grid w-full grid-cols-4 items-center gap-4 border-b border-gray-200 transition-colors duration-150",
+          "grid w-full grid-cols-5 items-center gap-4 border-b border-gray-200 transition-colors duration-150",
           {
             "hover:bg-gray-50": !isFolder,
             "border-b-px cursor-pointer rounded-md border-2 border-green-500 bg-green-100 hover:bg-green-200":
               isFolder,
           },
         )}
-        style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
+        style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
       >
         <TableCell className="px-3 py-5 font-medium text-gray-800">
           <div
@@ -82,6 +82,11 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
           </span>
         </TableCell>
 
+        {/* File size */}
+        <TableCell className="px-3 py-5 text-center text-gray-600">
+          {isFolder ? "-" : formatFileSize(file.size)}
+        </TableCell>
+
         {/* Last modified */}
         <TableCell className="px-3 py-5 text-center text-gray-600">
           {formatReadableDate(file.lastModified.toISOString())}
@@ -96,7 +101,7 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
       {/* Conditionally render children for folders */}
       {isFolder && isExpanded && (
         <tr>
-          <td colSpan={4}>
+          <td colSpan={5}>
             <div className="pl-6">{children}</div>
           </td>
         </tr>
