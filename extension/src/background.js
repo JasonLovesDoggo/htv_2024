@@ -3,11 +3,11 @@ function uploadFile(file) {
     formData.append('file', file);
     formData.append("name", file.name)
 
-    fetch('https://fb5f-2606-fa00-8a0-705-4cdc-df1b-2991-e1b5.ngrok-free.app/api/file', {
+    fetch('https://a588-2606-fa00-8a0-705-4cdc-df1b-2991-e1b5.ngrok-free.app/api/file', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => console.log(response))
     .then(data => {
         console.log('File uploaded successfully:', data);
     })
@@ -62,4 +62,4 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
 });
 
-chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });a
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
