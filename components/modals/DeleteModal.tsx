@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-import { File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,7 @@ const DeleteModal = () => {
   const router = useRouter();
 
   const isOpen = modal.isOpen && modal.modalType === "delete";
-  const file = modal.data;
+  const file = modal.data as FileType | undefined;
 
   const handleDelete = async () => {
     if (!file) {
@@ -41,23 +41,6 @@ const DeleteModal = () => {
       console.error("Error deleting file:", error);
       toast.error("Something went wrong. Please try again.");
     }
-
-    // const serverUrl = `http://127.0.0.1:9000/first-bucket`;
-
-    // // Delete the file from the server
-    // const res = await fetch(`${serverUrl}/${encodeURIComponent(file.name)}`, {
-    //   method: "DELETE",
-    // });
-
-    // console.log("Response:", res);
-
-    // if (!res.ok) {
-    //   throw new Error("Failed to delete file");
-    // }
-
-    // console.log(`File ${file?.name} deleted.`);
-
-    // modal.onClose();
   };
 
   return (

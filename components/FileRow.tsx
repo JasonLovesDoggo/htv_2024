@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-import { type File } from "@/lib/data/file";
+import { type FileType } from "@/lib/data/file";
 import { cn, formatReadableDate } from "@/lib/utils";
 import { TableCell, TableRow } from "@/components/ui/table";
 
 import FileActionsDropdown from "./FileActionsDropdown";
 
 interface FileRowProps {
-  file: File;
+  file: FileType;
   level: number;
   isFolder?: boolean;
   children?: React.ReactNode;
@@ -84,7 +84,7 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
 
         {/* Last modified */}
         <TableCell className="px-3 py-5 text-center text-gray-600">
-          {formatReadableDate(file.lastModified)}
+          {formatReadableDate(file.lastModified.toISOString())}
         </TableCell>
 
         {/* Action buttons / dropdown */}

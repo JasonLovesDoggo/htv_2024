@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-import { File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 
 type ModalType = "upload" | "delete" | "edit" | "share" | "serverUrl";
-type ModalData = File;
+type ModalData = FileType;
 
 interface UploadModalProps {
   isOpen: boolean;

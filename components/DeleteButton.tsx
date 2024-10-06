@@ -3,19 +3,15 @@
 import React from "react";
 import { Trash2 } from "lucide-react"; // Use lucide-react icons
 
-import { type File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 
 interface DeleteButtonProps {
-  file: File;
+  file: FileType;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ file }) => {
   const modal = useModal();
-
-  const onDelete = (file: File) => {
-    console.log("Deleting file:", file.name);
-  };
 
   return (
     <button

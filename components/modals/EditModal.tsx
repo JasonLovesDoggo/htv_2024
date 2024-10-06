@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { Clock, User, Users } from "lucide-react";
 
 import { useModal } from "@/hooks/use-modal";
@@ -47,15 +46,9 @@ const EditModal = () => {
             </p>
           </div>
           <div className="flex items-center space-x-3">
-            <Users className="h-5 w-5 text-gray-500" />
-            <p className="text-sm font-medium text-gray-900">
-              Owner: {file?.owner}
-            </p>
-          </div>
-          <div className="flex items-center space-x-3">
             <Clock className="h-5 w-5 text-gray-500" />
             <p className="text-sm font-medium text-gray-900">
-              Last modified: {file?.lastModified}
+              Last modified: {file?.lastModified.toLocaleString()}
             </p>
           </div>
           <div className="flex items-center space-x-3">

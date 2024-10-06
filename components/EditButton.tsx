@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { Edit } from "lucide-react"; // Use lucide-react icons
+import { Edit } from "lucide-react";
 
-import { type File } from "@/lib/data/file";
+import { FileType } from "@/lib/data/file";
 import { useModal } from "@/hooks/use-modal";
 
 interface EditButtonProps {
-  file: File;
+  file: FileType;
 }
 
 const EditButton: React.FC<EditButtonProps> = ({ file }) => {
