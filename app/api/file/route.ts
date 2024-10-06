@@ -28,6 +28,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
+    const { searchParams } = new URL(request.url);
+    const share = searchParams.get("share");
 
     const file = formData.get("file") as File;
     const fileName = formData.get("name") as string;
@@ -50,7 +52,16 @@ export async function POST(request: Request) {
 
     revalidatePath("/files");
 
-    return new Response(JSON.stringify({ success: true }), {
+    var response: {
+      success: boolean;
+      shareLink?: string;
+    } = {
+      success: true,
+    };
+    if (share && share.toLowerCase() === "true") {
+      response.shareLink = `/api/file/download?name=${fileName}`;
+    }
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
