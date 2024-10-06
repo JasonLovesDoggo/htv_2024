@@ -37,31 +37,41 @@ export const serverUrlSchema = z.object({
 export type ServerUrlFormValues = z.infer<typeof serverUrlSchema>;
 
 // POST
+// /api/filter
+export const filter = z.object({
+  limit: z.number().optional(), // 5. It's also int.
+});
+
+// POST
 // /api/filter/name
 export const filterByName = z.object({
-  limit: z.number().optional(), // 0 for unlimited. It's also int.
+  limit: z.number().optional(),
+  name: z.string(),
 });
 
 // POST
 // /api/filter/category
-export const filterByCategory = z.object({
-  limit: z.number().optional(), // 0 for unlimited. It's also int.
-});
+export const filterByCategory = z
+  .object({
+    limit: z.number().optional(), // 5. It's also int.
+    category: z.string(),
+  })
+  .strict();
 
 // POST
 // /api/order/file-size
 export const orderByFileSize = z.object({
-  limit: z.number().optional(), // 0 for unlimited. It's also int.
-  largestFirst: z.boolean().optional(), // Can't have both at the same time.
-  leastFirst: z.boolean().optional(), // Can't have both at the same time.
+  limit: z.number().optional(), // 5. It's also int.
+  descending: z.boolean().optional(), // Can't have both at the same time.
+  ascending: z.boolean().optional(), // Can't have both at the same time.
 });
 
 // POST
 // /api/order/uploaded-date
 export const orderByUploadedDate = z.object({
-  limit: z.number().optional(), // 0 for unlimited
-  latestFirst: z.boolean().optional(), // Can't have both at the same time.
-  earlielargestFirststFirst: z.boolean().optional(), // Can't have both at the same time.
+  limit: z.number().optional(), // 5
+  ascending: z.boolean().optional(), // Can't have both at the same time.
+  descending: z.boolean().optional(), // Can't have both at the same time.
 });
 
 // POST
@@ -86,7 +96,7 @@ export const createFolder = z
 // this is temporary so this might be be changed.
 export const shareFile = z.object({
   password: z.string().min(8).optional(),
-  nuses: z.number().optional(), // 0 menas unlimited and it's also int
+  nuses: z.number().optional(), // 0 means unlimited and it's also int
 });
 
 // POST
@@ -94,5 +104,5 @@ export const shareFile = z.object({
 // this is temporary so this might be be changed.
 export const shareFolder = z.object({
   password: z.string().min(8).optional(),
-  nuses: z.number().optional(), // 0 menas unlimited and it's also int
+  nuses: z.number().optional(), // 0 means unlimited and it's also int
 });
