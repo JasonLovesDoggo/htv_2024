@@ -2,26 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Side Panel</title>
     <link rel="stylesheet" href="sidepanel.css">
 </head>
 <body>
     <div id="drop-zone">
-        <p>📁 Drag and drop files here</p>
+        <p>Drag and drop files here</p>
     </div>
     <ul id="file-list"></ul>
     <div id="file-details" class="hidden">
-        <div id="file-name-input">
-            <input type="text" id="file-name" placeholder="Enter file name">
-        </div>
+        <input type="text" id="file-name" placeholder="Enter file name">
         <div id="storage-suggestions">
             <h3>Suggested Storage Locations:</h3>
-            <ul>
-                <li class="suggestion">Local Drive (C:)</li>
-                <li class="suggestion">Cloud Storage</li>
-                <li class="suggestion">Network Drive</li>
-            </ul>
+            <button class="suggestion" id="suggestion1">work</button>
+            <button class="suggestion" id="suggestion2">TODO</button>
+            <button class="suggestion" id="suggestion3">other</button>
         </div>
+    </div>
+    <div id="global-input-container" style="position: fixed; bottom: 10px; left: 10px; right: 10px;">
+        <input type="text" id="global-input" placeholder="Enter global value">
+        <button id="set-global-button">Set Global</button>
     </div>
     <script src="sidepanel.js"></script>
 </body>
