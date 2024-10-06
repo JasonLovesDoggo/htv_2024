@@ -15,9 +15,9 @@ export type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
-  { href: "/", label: "Home", icon: Home },
+  { href: "/dashboard", label: "Home", icon: Home },
   { href: "/files", label: "Files", icon: Folder },
   { href: "/shared", label: "Shared", icon: Users },
 ];
 
-export const serverUrl = "http://127.0.0.1:9000/first-bucket";
+export const serverUrl = process.env.SERVER_URL;
