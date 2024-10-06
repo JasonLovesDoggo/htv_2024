@@ -57,10 +57,10 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
               </button>
             ) : (
               <a
-                href={file.url}
+                href={`/api/file/download?name=${file.name}`}
                 target="_blank"
                 className="text-blue-600 hover:underline"
-                download={file.name}
+                download={`/api/file/download?name=${file.name}`}
               >
                 {file.name.split("/").pop()}
               </a>
