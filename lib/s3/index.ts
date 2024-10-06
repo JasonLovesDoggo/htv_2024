@@ -1,5 +1,8 @@
 import AWS from "aws-sdk";
 
+
+const endpoint = process.env.SERVER_URL?.replace("/first-bucket", "");
+
 export const s3 = new AWS.S3({
   endpoint: "http://127.0.0.1:9000",
   accessKeyId: process.env.S3_ACCESS_KEY,
