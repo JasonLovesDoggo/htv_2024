@@ -1,23 +1,28 @@
 import AWS from "aws-sdk";
 
 // Configure the AWS SDK to point to your MinIO instance
-const s3 = new AWS.S3({
-  endpoint: "http://127.0.0.1:9000", // MinIO URL
-  accessKeyId: "minioadmin", // Your MinIO access key
-  secretAccessKey: "minioadmin", // Your MinIO secret key
-  s3ForcePathStyle: true, // Required for MinIO
-  signatureVersion: "v4", // Required for MinIO
+export const s3 = new AWS.S3({
+  endpoint: "http://127.0.0.1:9000",
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_KEY,
+  s3ForcePathStyle: true,
+  signatureVersion: "v4",
 });
 
-// List objects in the bucket
 const params = {
-  Bucket: "first-bucket", // The name of your bucket
+  Bucket: "first-bucket",
 };
 
 s3.listObjects(params, (err, data) => {
   if (err) {
     console.log("Error", err);
   } else {
-    console.log("Success", data); // Outputs JSON data with object info
+    console.log("Success", data);
   }
 });
+
+export const listObjects = async () => {
+  const data = await s3.listObjects(params).promise();
+
+  return data.Contents;
+};

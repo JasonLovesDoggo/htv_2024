@@ -63,7 +63,7 @@ const FileListTable = ({
     <TableHeader>
       <FileListHeader />
     </TableHeader>
-    <TableBody>
+    <TableBody className="space-y-1">
       <RenderFolder structure={folderStructure} level={0} />
     </TableBody>
   </Table>

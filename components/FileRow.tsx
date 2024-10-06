@@ -33,7 +33,8 @@ const FileRow = ({ file, level, isFolder = false, children }: FileRowProps) => {
           "grid w-full grid-cols-4 items-center gap-4 border-b border-gray-200 transition-colors duration-150",
           {
             "hover:bg-gray-50": !isFolder,
-            "cursor-pointer bg-green-400 hover:bg-green-500": isFolder,
+            "border-b-px cursor-pointer rounded-md border-2 border-green-500 bg-green-100 hover:bg-green-200":
+              isFolder,
           },
         )}
         style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
